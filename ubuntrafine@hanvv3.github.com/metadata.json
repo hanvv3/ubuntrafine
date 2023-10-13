@@ -1,0 +1,10 @@
+{
+	"description" : "Brightness Controller for Ultrafine Displays",
+	"name": "Ubuntrafine",
+	"shell-version": [
+		"42.9"
+	],
+	"url" : "",
+	"uuid": "ubuntrafine@hanvv3.github.com",
+	"version" : 1
+}
