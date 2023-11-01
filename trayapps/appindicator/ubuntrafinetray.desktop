@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Ubuntrafine Tray
+GenericName=Ubuntrafinetray
+Comment=Brightness Control for Ultrafine
+Exec=/bin/bash -c "{homedir}/.config/ubuntrafine/ubuntrafinetray.py"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

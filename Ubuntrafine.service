@@ -1,0 +1,10 @@
+[Unit]
+Description=Ubuntrafine Key Listener Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/path/to/your/program
+
+[Install]
+WantedBy=multi-user.target
