@@ -8,12 +8,12 @@
 
 const char* findMagicKeyboard() {
 
+    //const char* dev_name = "Magic Keyboard";
     const char* dev_name = "py-evdev-uinput";
 
     DIR* dir;
     struct dirent* ent;
     const char* base_path = "/dev/input/";
-    //const char* dev_name = "Magic Keyboard";
     char* device_path = nullptr;
 
     if ((dir = opendir(base_path)) != nullptr) {
@@ -65,13 +65,13 @@ const char* findMagicKeyboard() {
 int main() {
     const char *devicePath = findMagicKeyboard();
     if (!devicePath) {
-        std::cerr << "Magic Keyboard not found" << std::endl;
+        //std::cerr << "Magic Keyboard not found" << std::endl;
         return 1;
     }
 
     int fd = open(devicePath, O_RDONLY | O_NONBLOCK);
     if (fd < 0) {
-        std::cerr << "Error opening device" << std::endl;
+        //std::cerr << "Error opening device" << std::endl;
         free((void*)devicePath);  // Clean up the allocated string
         return 1;
     }
@@ -79,12 +79,12 @@ int main() {
     struct libevdev *device = nullptr;
     int result = libevdev_new_from_fd(fd, &device);
     if (result < 0) {
-        std::cerr << "Failed to initialize libevdev" << std::endl;
+        //std::cerr << "Failed to initialize libevdev" << std::endl;
         free((void*)devicePath);  // Clean up the allocated string
         return 1;
     }
 
-    std::cout << "Listening for key events on " << devicePath << "..." << std::endl;
+    //std::cout << "Listening for key events on " << devicePath << "..." << std::endl;
     free((void*)devicePath);  // Clean up the allocated string
 
     while (true) {

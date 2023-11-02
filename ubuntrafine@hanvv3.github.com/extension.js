@@ -1,4 +1,4 @@
-const { St, Clutter, GObject, GLib, Gio } = imports.gi;
+const { St, Clutter, GObject, GLib } = imports.gi;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
@@ -14,7 +14,7 @@ class BrightnessControl extends PanelMenu.Button {
             style_class: 'system-status-icon brightness-control-icon'
         });
         this.add_child(icon);
-
+        
         // Align dropdown slider container with the icon in the center.
         this.menu._arrowAlignment = 0.5;
 
@@ -25,14 +25,13 @@ class BrightnessControl extends PanelMenu.Button {
             hover: false,
             can_focus: false
         });
-        this._sliderItem.add_child(this._slider);
+        this._sliderItem.add_child(this._slider.actor);
         this._slider.connect('notify::value', this._sliderChanged.bind(this));
         this.menu.addMenuItem(this._sliderItem);
 
+        this.menu.connect('open-state-changed', this._onMenuToggled.bind(this));
         this.menu.passEvents = true;
         this.menu.actor.connect('button-press-event', this._onMenuActorPressed.bind(this));
-
-        this._keyPressSignalId = global.stage.connect('key-press-event', this._handleKeyPress.bind(this));
     }
 
     _getCurrentBrightness() {
@@ -45,6 +44,13 @@ class BrightnessControl extends PanelMenu.Button {
             }
         }
         return 0.5; // Default value if brightness cannot be determined
+    }
+
+    _onMenuToggled(menu, open) {
+        if (open) {
+            // Update the slider value when the menu is opened
+            this._slider.value = this._getCurrentBrightness();
+        }
     }
 
     _onMenuActorPressed(actor, event) {
@@ -71,34 +77,11 @@ class BrightnessControl extends PanelMenu.Button {
             log(`Exception while running command: ${commandLine}. Message: ${e.message}`);
         }
     }
-    
-    _handleKeyPress(actor, event) {
-        let key = event.get_key_code();
-        if (key === 224) {  // Replace with actual key code for brightness down
-            this._decreaseBrightness();
-            return Clutter.EVENT_STOP;
-        } else if (key === 225) {  // Replace with actual key code for brightness up
-            this._increaseBrightness();
-            return Clutter.EVENT_STOP;
-        }
-        return Clutter.EVENT_PROPAGATE;
-    }
-    
-    
-    // Keybindings to brightness changes
-    _increaseBrightness() {
-        GLib.spawn_command_line_sync("env TERM=xterm ufctl +");
-    }
-
-    _decreaseBrightness() {
-        GLib.spawn_command_line_sync("env TERM=xterm ufctl -");
-    }
 });
 
 let _brightnessControl;
 
-function init() {
-}
+function init() {}
 
 function enable() {
     _brightnessControl = new BrightnessControl();
@@ -106,6 +89,5 @@ function enable() {
 }
 
 function disable() {
-    _brightnessControl._removeKeybindings();
     _brightnessControl.destroy();
 }

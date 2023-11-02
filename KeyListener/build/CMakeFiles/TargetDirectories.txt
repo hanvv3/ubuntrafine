@@ -1,0 +1,3 @@
+/home/seanhan/Git-Apps/ubuntrafine/ListenKeys/build/CMakeFiles/BrightnessKeyListener.dir
+/home/seanhan/Git-Apps/ubuntrafine/ListenKeys/build/CMakeFiles/edit_cache.dir
+/home/seanhan/Git-Apps/ubuntrafine/ListenKeys/build/CMakeFiles/rebuild_cache.dir
