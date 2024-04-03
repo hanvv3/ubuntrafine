@@ -9,6 +9,9 @@ Ubuntu Gnome extension for MacOS-like LG Ultrafine 5k Display brightness control
 * Can seamlessly work with Apple Magic Keyboard
 
 -----------
+## Before Use
+`ufctl` requires `sudo` in order to operate "libusb". You can edit `/etc/sudoers` or add additional lines to `/etc/sudoers.d/local` to execute this command without `sudo`
+
 ## `ufctl` Usage
 
 - `ufctl` cli mode
@@ -17,9 +20,16 @@ Ubuntu Gnome extension for MacOS-like LG Ultrafine 5k Display brightness control
 - `ufctl get` gets the first Ultrafine display's brightness in percentage. ( this means you can skip the index number of your Ultrafine device if you have only one, not tested where you have more than one device )
 - `ufctl set 0 {brightness}` sets the "first" (zero index) Ultrafine display's brightness to {brightness} in percentage.
 
+## Support List:
+* 24MD4KL
+* 27MD5KL
+* 27MD5KA
 
-
-
+## Build
+* mkdir build
+* cd build
+* cmake ..
+* make
 
 
 
