@@ -14,7 +14,7 @@ Ubuntu Gnome extension for MacOS-like LG Ultrafine 5k Display brightness control
 
 ## `ufctl` Usage
 
-- `ufctl` cli mode
+- `ufctl` enters cli mode
 - `ufctl +` brightens by a step
 - `ufctl -` dims the brightness by a step
 - `ufctl get` gets the first Ultrafine display's brightness in percentage. ( this means you can skip the index number of your Ultrafine device if you have only one, not tested where you have more than one device )
