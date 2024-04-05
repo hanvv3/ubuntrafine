@@ -26,6 +26,7 @@ Ubuntu Gnome extension for MacOS-like LG Ultrafine 5k Display brightness control
 * 27MD5KA
 
 ## Build
+* cd .../ufctl
 * mkdir build
 * cd build
 * cmake ..
